@@ -1,0 +1,38 @@
+/bholari/framework/*
+/bholari/requirements/*
+/bholari/protected/runtime/*
+/bholari/protected/runtime/gii-1.1.30/
+/bholari/protected/runtime/gii-1.1.30/*
+/bholari/protected/config/
+/bholari/protected/config/*
+/bholari/protected/config/database.php
+bholari/protected/config/main.php
+/bholari/uploads/games/*
+/bholari/uploads/amenities/*
+/bholari/uploads/venues/*
+/bholari/uploads/banners/*
+/bholari/assets/vendor/*
+/bholari/assets/letter/*
+.idea/*
+.idea
+bholari/runtime/gii-1.1.30/*
+bholari/protected/runtime/*
+
+# Ignore everything in the assets folder
+/bholari/assets/*
+# Except the dist folder
+bholari/!/assets/dist/
+
+bholari/assets/
+bholari/!assets/dist/
+# Ignore protected/runtime
+bholari/protected/runtime/
+
+# Ignore protected/config
+bholari/protected/config/
+
+# Ignore other common files
+.idea/
+bholari/vendor/
+bholari/node_modules/
+bholari/*.log
