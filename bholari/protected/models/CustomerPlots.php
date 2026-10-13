@@ -134,7 +134,10 @@ class CustomerPlots extends CActiveRecord
             'customerPlotTransactionSumYearly' => array(self::STAT, 'CustomerPlotTransactions', 'plot_id', 'select'=>'SUM(amount)','condition'=>'plot_payment_mode_id = 8'),
             'customerPlotTransactionSumDemarcation' => array(self::STAT, 'CustomerPlotTransactions', 'plot_id', 'select'=>'SUM(amount)','condition'=>'plot_payment_mode_id = 5'),
             'customerPlotTransactionSumPossession' => array(self::STAT, 'CustomerPlotTransactions', 'plot_id', 'select'=>'SUM(amount)','condition'=>'plot_payment_mode_id = 6'),
-			
+
+			'customerPlotCallHistoryAll' => array(self::HAS_MANY, 'BookingCallHistory', 'booking_id','order'=>'id DESC'),
+			'customerPlotCallHistorySms' => array(self::HAS_MANY, 'BookingCallHistory', 'booking_id','order'=>'id DESC','limit'=>2),
+
 		);
 	}
 

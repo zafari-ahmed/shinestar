@@ -45,8 +45,8 @@ class Controller extends CController
 		  ),
 		);
 		//echo $mesage.'</br>';
-		$context  = @stream_context_create($options);
-		$result = @file_get_contents($msg, false, $context);
+		//$context  = @stream_context_create($options);
+		//$result = @file_get_contents($msg, false, $context);
 		//var_dump($result); exit;
 	}
 

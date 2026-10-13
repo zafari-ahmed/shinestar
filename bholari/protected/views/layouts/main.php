@@ -329,6 +329,9 @@
                                 <li>
                                     <a href="<?php echo Yii::app()->baseUrl.'/booking'?>">Manage Bookings</a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo Yii::app()->baseUrl.'/callings'?>">Call History</a>
+                                </li>
                                 <?php if($userModel['user_type']['id'] == 1 || $userModel['user_type']['id'] == 3 || $userModel['user_type']['id'] == 5){?>
                                 <li>
                                     <a href="<?php echo Yii::app()->baseUrl.'/booking/add'?>">New Booking</a>

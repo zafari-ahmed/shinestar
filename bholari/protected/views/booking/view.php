@@ -1011,6 +1011,98 @@ if($userModel['user_type']['id'] == 1 || $userModel['user_type']['id'] == 5){
                 <?php }?>
             </div>
         </div>
+
+        <?php
+        $callStatus = Yii::app()->params['callStatus'];
+        $callStatusColor = Yii::app()->params['callStatusColor'];
+        $bookingStatus = Yii::app()->params['bookingStatus'];
+        $bookingStatusColor = Yii::app()->params['bookingStatusColor'];
+        ?>
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b style="text-transform: UPPERCASE;font-weight: bold;">Call History</b>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <form role="form" method="POST" action="<?php echo Yii::app()->baseUrl?>/bookingcall/save" enctype="multipart/form-data">
+                            <input type="hidden" name="booking_id"  value="<?php echo $booking->id?>">
+                            <div class="form-group col-lg-3" style="padding-right: 0px;">
+                                <label>Call Status</label>
+                                <select name="call_status" id="call_status" class="form-control">
+                                    <option value="">Please Select Call Status</option>
+                                    <?php foreach($callStatus as $callS=>$callST):?>
+                                        <option value="<?php echo $callS?>"><?php echo $callST?></option>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-3" style="padding-right: 0px;">
+                                <label>Booking Status</label>
+                                <select name="booking_status" id="booking_status" class="form-control">
+                                    <option value="">Please Select Booking Status</option>
+                                    <?php foreach($bookingStatus as $bookS=>$bookST):?>
+                                        <option value="<?php echo $bookS?>"><?php echo $bookST?></option>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-3" >
+                                <label>Call Audio File</label>
+                                <input type="file" class="form-control" name="callFile" id="callFile" placeholder="Upload Audio File" >
+                            </div>
+                            <div class="form-group col-lg-3">
+                                <label>Next Reminder</label>
+                                <input class="form-control calender"  name="next_reminder" placeholder="Next Reminder" autocomplete="off" required value="<?php echo date('Y-m-d', strtotime('+7 days')); ?>">
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>Remark</label>
+                                <textarea class="form-control" rows="3" name="remarks" placeholder="Remarks" required></textarea>
+                            </div>
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <hr/>
+                    <div class="col-lg-12" style="padding-left: 0px;">
+                        <h3 style="text-transform: UPPERCASE;font-weight: bold;">Call History</h3>
+                        <table width="100%" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Called By</th>
+                                    <th>Call Status</th>
+                                    <th>Booking Status</th>
+                                    <th style="width:10%">Remarks</th>
+                                    <th>Audio File</th>
+                                    <th>Next Reminder</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($booking->customerPlotCallHistoryAll as $callH):?>
+                                    <?php
+                                        $csc = $callStatusColor[$callH->call_status];
+                                        $bsc = $bookingStatusColor[$callH->booking_status];
+                                    ?>
+                                <tr>
+                                    <td><b><?php echo date('d M,Y H:i',strtotime(@$callH->created_at))?></b></td>
+                                    <td><b><?php echo $callH->user->first_name?></b></td>
+                                    <td style="color: white;background-color: <?php echo $csc?>;"><b><?php echo @$callStatus[$callH->call_status]?></b></td>
+                                    <td style="color: white;background-color: <?php echo $bsc?>;"><b><?php echo @$bookingStatus[$callH->booking_status]?></b></td>
+                                    <td style="width:10%"><b><?php echo CHtml::encode($callH->remarks);?></b></td>
+                                    <td>
+                                        <?php if(!empty($callH->call_audio_file)){?>
+                                        <a target="_blank" href="<?php echo Yii::app()->baseUrl?>/uploads/booking_audio/<?php echo $callH->call_audio_file?>">Audio File</a>
+                                        <?php }?>
+                                    </td>
+                                    <td><b><?php echo date('d M,Y',strtotime(@$callH->next_reminder))?></b></td>
+                                </tr>
+                                <?php endforeach;?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
 </div>
 
